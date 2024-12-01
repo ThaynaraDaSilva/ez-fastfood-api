@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer{
 	public void addCorsMappings(CorsRegistry registry) {
         // Allow all origins and methods for testing purposes
         registry.addMapping("/**")
-        		.allowedOriginPatterns("http://9175-177-190-77-68.ngrok-free.app") // Adicione todas as URLs específicas aqui
+        		.allowedOriginPatterns("https://4cd4-177-190-77-61.ngrok-free.app") // Adicione todas as URLs específicas aqui
         		//.allowedOrigins("http://localhost:8080", "https://9175-177-190-77-68.ngrok-free.app", "http://9175-177-190-77-68.ngrok-free.app")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 
