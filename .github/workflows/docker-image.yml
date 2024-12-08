@@ -38,16 +38,33 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: dasilvathaynara/ez-fast-food-api:v3
-  #deploy:
-    #needs: build
-    #runs-on: ubuntu-latest
+        
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
 
-    #steps:
-    #- name: Checkout repository
-      #uses: actions/checkout@v3
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-    #- name: Set Kubernetes context
-      #run: kubectl config set-context --current --namespace=default
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1 # Replace with your region
 
-    #- name: Apply Kubernetes manifests
-      #run: kubectl apply -f k8s/
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+
+    - name: Update kubeconfig for EKS
+      run: aws eks update-kubeconfig --region us-east-1 --name ez-fastfood-dev
+
+    - name: Apply Kubernetes manifests
+      run: |
+        kubectl apply -f k8s/api-deployment.yaml
+        kubectl apply -f k8s/api-service.yaml
+        kubectl apply -f k8s/api-configmap.yaml
+        kubectl apply -f k8s/ezfastfood-secrets.yaml
