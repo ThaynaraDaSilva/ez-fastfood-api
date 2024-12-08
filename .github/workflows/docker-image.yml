@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+	  - feature/api-migration-to-aws-eks
 
 jobs:
   build:
@@ -37,7 +38,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: dasilvathaynara/ez-fast-food-api:latest
+        tags: dasilvathaynara/ez-fast-food-api:v3
   #deploy:
     #needs: build
     #runs-on: ubuntu-latest
