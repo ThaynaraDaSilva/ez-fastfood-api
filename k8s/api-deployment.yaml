@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: ezfastfood-container
-        image: dasilvathaynara/ez-fast-food-api:latest
+        image: dasilvathaynara/ez-fast-food-api:v3
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -45,8 +45,8 @@ spec:
             cpu: "250m"
             memory: "150Mi"
           limits:
-            cpu: "350m"
-            memory: "750Mi"
+            cpu: "300m"
+            memory: "700Mi"
         readinessProbe:
           httpGet:
             path: /actuator/health 
