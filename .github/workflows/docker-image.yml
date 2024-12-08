@@ -54,14 +54,15 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1 # Replace with your region
 
-    - name: Set up kubectl
-      uses: azure/setup-kubectl@v3
-      with:
-        version: 'latest'
-
+    - name: Install kubectl
+      run: |
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x kubectl
+        sudo mv kubectl /usr/local/bin/
+    
     - name: Update kubeconfig for EKS
       run: aws eks update-kubeconfig --region us-east-1 --name ez-fastfood-dev
-
+    
     - name: Apply Kubernetes manifests
       run: |
         kubectl apply -f k8s/api-deployment.yaml
