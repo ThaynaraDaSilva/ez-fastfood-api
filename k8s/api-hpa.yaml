@@ -2,7 +2,6 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: ezfastfood-api-hpa
-  namespace: ezfastfood
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
