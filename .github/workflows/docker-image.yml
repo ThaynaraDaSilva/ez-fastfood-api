@@ -84,6 +84,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Verify Docker Login
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
   build-and-push-image:
     needs: login-docker
     runs-on: ubuntu-latest
@@ -102,6 +105,9 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: dasilvathaynara/ez-fast-food-api:latest
+
+      - name: Show Docker config
+        run: cat ~/.docker/config.json
 
 # Optional Deploy Job
 # deploy:
