@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - fix/workflow
 
 env:
   JAVA_VERSION: '17'
@@ -13,9 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
@@ -27,9 +25,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
@@ -44,9 +39,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
@@ -70,8 +62,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+      
+      - name: List files recursively
+        run: find . -name "Dockerfile"
 
       - name: List files in the repository
         run: |
@@ -90,7 +88,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: /home/runner/work/ez-fastfood-api/ez-fastfood-api/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: dasilvathaynara/ez-fast-food-api:latest
 
