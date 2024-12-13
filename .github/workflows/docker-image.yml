@@ -90,7 +90,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile
+          file: /home/runner/work/ez-fastfood-api/ez-fastfood-api/Dockerfile
           push: true
           tags: dasilvathaynara/ez-fast-food-api:latest
 
