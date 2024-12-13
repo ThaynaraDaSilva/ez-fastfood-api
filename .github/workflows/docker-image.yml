@@ -5,6 +5,9 @@ on:
     branches:
       - develop
 
+env:
+  JAVA_VERSION: '17'
+
 jobs:
   setup-jdk:
     runs-on: ubuntu-latest
@@ -13,11 +16,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: ${{ env.JAVA_VERSION }}
 
   run-tests:
     needs: setup-jdk
@@ -27,11 +30,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: ${{ env.JAVA_VERSION }}
 
       - name: Run Unit Tests
         run: mvn test
@@ -44,6 +47,7 @@ jobs:
         with:
           name: test-report
           path: target/surefire-reports
+
   build-package:
     needs: run-tests
     runs-on: ubuntu-latest
@@ -87,17 +91,17 @@ jobs:
           push: true
           tags: dasilvathaynara/ez-fast-food-api:latest
 
-  # Optional Deploy Job
-  # deploy:
-  #   needs: build-and-push-image
-  #   runs-on: ubuntu-latest
-  #
-  #   steps:
-  #   - name: Checkout repository
-  #     uses: actions/checkout@v3
-  #
-  #   - name: Set Kubernetes context
-  #     run: kubectl config set-context --current --namespace=default
-  #
-  #   - name: Apply Kubernetes manifests
-  #     run: kubectl apply -f k8s/
+# Optional Deploy Job
+# deploy:
+#   needs: build-and-push-image
+#   runs-on: ubuntu-latest
+#
+#   steps:
+#   - name: Checkout repository
+#     uses: actions/checkout@v3
+#
+#   - name: Set Kubernetes context
+#     run: kubectl config set-context --current --namespace=default
+#
+#   - name: Apply Kubernetes manifests
+#     run: kubectl apply -f k8s/
