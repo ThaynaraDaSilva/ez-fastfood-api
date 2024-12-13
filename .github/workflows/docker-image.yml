@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - fix/workflow
 
 env:
   JAVA_VERSION: '17'
@@ -72,6 +73,9 @@ jobs:
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+      
+      - name: List files recursively
+        run: find . -name "Dockerfile"
 
       - name: List files in the repository
         run: |
