@@ -200,6 +200,12 @@ Essa ferramenta foi utilizada para estressar a API durante nossas validações d
 - Link para download: https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-5.6.3.zip
 - Arquivo "ez-fast-food-api.jmx" disponível no diretório: postman-jmeter/ deste repositório.
 
+## Links dos demais repositórios:
+- Lambda: https://github.com/ThaynaraDaSilva/ez-fastfood-authentication
+- EKS: https://github.com/ThaynaraDaSilva/ez-fastfood-eks
+- Network: https://github.com/ThaynaraDaSilva/ez-fastfood-network
+- RDS: https://github.com/ThaynaraDaSilva/ez-fastfood-database
+
 ## Desenvolvido por:
 @tchfer : RM357414<br>
 @ThaynaraDaSilva : RM357418<br>
