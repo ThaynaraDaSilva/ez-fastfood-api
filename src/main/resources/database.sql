@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS EZ_FASTFOOD.CUSTOMER(
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     cpf VARCHAR(14) UNIQUE,
-    email VARCHAR(255)
+    email VARCHAR(255),
+    password VARCHAR (10)
 );
 
 CREATE TABLE IF NOT EXISTS EZ_FASTFOOD.CATEGORY (
@@ -55,10 +56,10 @@ CREATE TABLE IF NOT EXISTS EZ_FASTFOOD.PAYMENT (
     FOREIGN KEY (customer_id) REFERENCES EZ_FASTFOOD.CUSTOMER(id)
 );
 
-INSERT INTO EZ_FASTFOOD.CUSTOMER (name, cpf, email)
+INSERT INTO EZ_FASTFOOD.CUSTOMER (name, cpf, email,password)
 VALUES 
-('Thaynara da Silva', '359.380.170-17', 'thaynara@gmail.com'),
-('Flavio da Silva', '530.335.610-80', 'flavio@gmail.com');
+('Thaynara da Silva', '359.380.170-17', 'thaynara@gmail.com','senha123'),
+('Flavio da Silva', '530.335.610-80', 'flavio@gmail.com','senha123');
 
 INSERT INTO EZ_FASTFOOD.CATEGORY (name)
 VALUES 
