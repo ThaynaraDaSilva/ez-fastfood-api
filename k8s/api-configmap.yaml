@@ -2,11 +2,10 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ezfastfood-api-configmap
-  namespace: ezfastfood
 data:
   APP_NAME: "ez-fast-food"
   LOG_LEVEL_SPRINGFRAMEWORK: "ERROR"
   LOG_LEVEL_SPRINGDOC: "off"
   LOG_LEVEL_HIBERNATE_SQL: "off"
-  API_DATASOURCE_URL: "jdbc:postgresql://ezfastfood-postgres-service:5432/postgres?currentSchema=ez_fastfood"
+  API_DATASOURCE_URL: "jdbc:postgresql://rds-postgres-dev-nvirginia-ezfastfood.cr6w0cgk4uiy.us-east-1.rds.amazonaws.com:5432/postgres?currentSchema=ez_fastfood"
   POSTGRES_PORT: "5432"
