@@ -55,7 +55,10 @@ jobs:
         run: mvn test
 
       - name: Generate Test Report
-        run: mvn surefire-report:report-only
+        run: | 
+          mvn surefire-report:report-only
+          ls -lha
+        
 
       - name: Show Test Results in Logs
         if: always()
@@ -68,12 +71,6 @@ jobs:
         with:
           name: test-report
           path: target/surefire-reports
-
-      - name: Upload Surefire HTML Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: surefire-html-report
-          path: target/site/surefire-report.html
 
   build-and-push-image:
     needs: run-tests
