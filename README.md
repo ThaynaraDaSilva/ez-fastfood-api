@@ -126,7 +126,7 @@ OBS...: substituir o localhost por novo host do AWS EKS.
 2.1. Inicie o postman.
 2.2. No canto superior esquerdo, clique em import.
 2.3. Arraste e solte o arquivo .json ou selecione-o manualmente para importar a collection.
-2.4. Substituir o localhost por novo host do AWS EKS.
+2.4. Substituir o localhost por novo host da AWS EKS.
 ```
 
 **Observações**:
