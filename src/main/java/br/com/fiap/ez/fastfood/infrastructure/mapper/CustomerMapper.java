@@ -35,6 +35,9 @@ public class CustomerMapper {
 
 	// Convert DTO to Domain Model
 	public static Customer dtoToDomain(CreateCustomerDTO customerDTO) {
+		if (customerDTO == null) {
+	        return null;
+	    }
 		Customer customer = new Customer();
 		customer.setCpf(customerDTO.getCpf());
 		customer.setName(customerDTO.getName());

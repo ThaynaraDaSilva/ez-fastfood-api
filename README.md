@@ -1,4 +1,4 @@
-# EZ-Fast-Food - Clean Architecture e Kubernetes
+# EZ-Fast-Food - Clean Architecture e Kubernetes 
 
 ## Contextualização
 
