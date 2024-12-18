@@ -96,30 +96,30 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: dasilvathaynara/ez-fast-food-api:v3
-  # deploy:
-  #  needs: build-and-push-image
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #  - name: Checkout repository
-  #    uses: actions/checkout@v3
-  #  - name: Configure AWS credentials
-  #    uses: aws-actions/configure-aws-credentials@v2
-  #    with:
-  #      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #      aws-region: us-east-1 # Replace with your region
-  #  - name: Install kubectl
-  #    run: |
-  #      curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-  #      chmod +x kubectl
-  #      sudo mv kubectl /usr/local/bin/
+  deploy:
+    needs: build-and-push-image
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1 # Replace with your region
+    - name: Install kubectl
+      run: |
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x kubectl
+        sudo mv kubectl /usr/local/bin/
  
-  #  - name: Update kubeconfig for EKS
-  #    run: aws eks update-kubeconfig --region us-east-1 --name ez-fastfood-dev
+    - name: Update kubeconfig for EKS
+      run: aws eks update-kubeconfig --region us-east-1 --name ez-fastfood-dev
  
-  #  - name: Apply Kubernetes manifests
-  #    run: |
-  #      kubectl apply -f k8s/api-deployment.yaml --validate=false
-  #      kubectl apply -f k8s/api-service.yaml
-  #      kubectl apply -f k8s/api-configmap.yaml
-  #      kubectl apply -f k8s/ezfastfood-secrets.yaml
+    - name: Apply Kubernetes manifests
+      run: |
+        kubectl apply -f k8s/api-deployment.yaml --validate=false
+        kubectl apply -f k8s/api-service.yaml
+        kubectl apply -f k8s/api-configmap.yaml
+        kubectl apply -f k8s/ezfastfood-secrets.yaml
