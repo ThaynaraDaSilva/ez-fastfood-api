@@ -1,10 +1,9 @@
 name: Build, Test, and Push Docker Image
 
 on:
-  push:
+  pull_request:
     branches:
-      - develop
-      - feature/api-migration-to-aws-eks
+      - main
 
 env:
   JAVA_VERSION: '17'

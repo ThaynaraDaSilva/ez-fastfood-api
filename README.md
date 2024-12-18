@@ -2,7 +2,7 @@
 
 ## Contextualização
 
-O **EZ-Fast-Food API** é uma solução desenvolvida para uma lanchonete em expansão, utilizando a arquitetura limpa (*clean architecture*) para assegurar uma separação clara entre a lógica de negócios e os detalhes de infraestrutura. A API é implantada com AWS EKS..
+O **EZ-Fast-Food API** é uma solução desenvolvida para uma lanchonete em expansão, utilizando a arquitetura limpa (*clean architecture*) para assegurar uma separação clara entre a lógica de negócios e os detalhes de infraestrutura. A API é implantada com AWS EKS.
 
 ## Desenho de arquitetura
 ![desenho-arquitetura-aws](https://github.com/user-attachments/assets/0ec3731b-c3d8-4db6-a890-15ee26e05b00)
@@ -52,7 +52,7 @@ Criar a infraestrutura nessa ordem:
 - Spring Boot 3.3.1
 - Hibernate
 - RDS PostgreSQL 13.17
-- Docker
+- DockerHub (https://hub.docker.com/repository/docker/dasilvathaynara/ez-fast-food-api/general)
 - Kubernetes
 - OpenApi
 
@@ -132,7 +132,7 @@ OBS...: substituir o localhost por novo host do AWS EKS.
 **Observações**:
 1. Já deixamos uma massa de dados automatizada para que você somente execute os endpoints.
 2. O fluxo mapeado não representa a navegação via frontend. Há endpoints tais como 'listar clientes' que estão presentes nesta jornada do backend apenas para apoiar o usuário final na validação.
-OBS...: substituir o localhost por novo host do AWS EKS.
+3. Substituir o localhost por novo host do AWS EKS.
 
 ##  Apache JMeter
 Essa ferramenta foi utilizada para estressar a API durante nossas validações de HPA.
