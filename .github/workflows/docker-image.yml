@@ -57,11 +57,23 @@ jobs:
       - name: Generate Test Report
         run: mvn surefire-report:report-only
 
+      - name: Show Test Results in Logs
+        if: always()
+        run: |
+          echo "========= Surefire Test Results ========="
+          cat target/surefire-reports/*.txt || echo "No test results found"
+
       - name: Upload Test Report as Artifact
         uses: actions/upload-artifact@v3
         with:
           name: test-report
           path: target/surefire-reports
+
+      - name: Upload Surefire HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: surefire-html-report
+          path: target/site/surefire-report.html
 
   build-and-push-image:
     needs: run-tests
