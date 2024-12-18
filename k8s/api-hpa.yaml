@@ -2,14 +2,13 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: ezfastfood-api-hpa
-  namespace: ezfastfood
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: ezfastfood-api-deployment  # Deployment to scale
   minReplicas: 1                   # Minimum number of pods
-  maxReplicas: 4                   # Maximum number of pods
+  maxReplicas: 1                   # Maximum number of pods
   metrics:
     - type: Resource
       resource:

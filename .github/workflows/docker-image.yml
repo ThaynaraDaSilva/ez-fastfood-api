@@ -1,8 +1,9 @@
 name: Build, Test, and Push Docker Image
 
 on:
-  push:
+  pull_request:
     branches:
+      - main
       - develop
 
 env:
@@ -54,7 +55,16 @@ jobs:
         run: mvn test
 
       - name: Generate Test Report
-        run: mvn surefire-report:report-only
+        run: | 
+          mvn surefire-report:report-only
+          ls -lha
+        
+
+      - name: Show Test Results in Logs
+        if: always()
+        run: |
+          echo "========= Surefire Test Results ========="
+          cat target/surefire-reports/*.txt || echo "No test results found"
 
       - name: Upload Test Report as Artifact
         uses: actions/upload-artifact@v3
@@ -85,19 +95,31 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: dasilvathaynara/ez-fast-food-api:latest
-
-# Optional Deploy Job
-# deploy:
-#   needs: build-and-push-image
-#   runs-on: ubuntu-latest
-#
-#   steps:
-#   - name: Checkout repository
-#     uses: actions/checkout@v3
-#
-#   - name: Set Kubernetes context
-#     run: kubectl config set-context --current --namespace=default
-#
-#   - name: Apply Kubernetes manifests
-#     run: kubectl apply -f k8s/
+          tags: dasilvathaynara/ez-fast-food-api:v3
+  deploy:
+    needs: build-and-push-image
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1 # Replace with your region
+    - name: Install kubectl
+      run: |
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x kubectl
+        sudo mv kubectl /usr/local/bin/
+ 
+    - name: Update kubeconfig for EKS
+      run: aws eks update-kubeconfig --region us-east-1 --name ez-fastfood-dev
+ 
+    - name: Apply Kubernetes manifests
+      run: |
+        kubectl apply -f k8s/api-deployment.yaml --validate=false
+        kubectl apply -f k8s/api-service.yaml
+        kubectl apply -f k8s/api-configmap.yaml
+        kubectl apply -f k8s/ezfastfood-secrets.yaml
