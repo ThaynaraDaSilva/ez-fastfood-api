@@ -7,6 +7,9 @@ O **EZ-Fast-Food API** é uma solução desenvolvida para uma lanchonete em expa
 ## Desenho de arquitetura
 ![desenho-arquitetura-aws](https://github.com/user-attachments/assets/0ec3731b-c3d8-4db6-a890-15ee26e05b00)
 
+## Apresentação da arquitetura: 
+https://www.youtube.com/watch?v=MhPpoUZhlFs
+
 ## Estrutura de diretórios do projeto
 ```
 br.com.fiap.ez.fastfood
