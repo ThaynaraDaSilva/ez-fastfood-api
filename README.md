@@ -2,7 +2,7 @@
 
 ## Contextualização
 
-O **EZ-Fast-Food API** é uma solução desenvolvida para uma lanchonete em expansão, utilizando a arquitetura limpa (*clean architecture*) para assegurar uma separação clara entre a lógica de negócios e os detalhes de infraestrutura. A API é implantada com AWS EKS.
+O **EZ-Fast-Food API** é uma solução desenvolvida para uma lanchonete em expansão, utilizando a arquitetura limpa (*clean architecture*) para assegurar uma separação clara entre a lógica de negócios e os detalhes de infraestrutura. A API é implantada com AWS EKS..
 
 ## Desenho de arquitetura
 ![desenho-arquitetura-aws](https://github.com/user-attachments/assets/0ec3731b-c3d8-4db6-a890-15ee26e05b00)
